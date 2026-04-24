@@ -54,7 +54,7 @@ const CartSummary = ({ onCheckout }) => {
       </div>
 
       <button
-        onClick={handleCheckout}
+        onClick={() => { handleCheckout(); clearCart(); }}
         className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl transition-all"
       >
         Finalizar Compra
