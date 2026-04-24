@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./index.css";
 import ProductCard from "./components/molecules/ProductCard";
-import CartSummary from "./components/organisms/CartSummary";
 import Navbar from "./components/organisms/Navbar";
 import useCartStore from "./store/useCartStore";
 import AuthPage from "./pages/AuthPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import useAuthStore from "./store/useAuthStore";
-import ProductosFirebase from "./components/ProductosFirebase";
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -116,7 +114,7 @@ function App() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-10">
+        <div className="grid grid-cols-2 gap-4 p-4 md:grid-cols-3 lg:grid-cols-4">
           {paginatedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
