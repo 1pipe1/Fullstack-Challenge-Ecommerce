@@ -14,9 +14,9 @@ const Navbar = ({ search, onSearchChange, onCheckout }) => {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-gray-900 border-b border-gray-700 px-3 md:px-8 py-4 flex items-center justify-between gap-4">
+      <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 px-3 md:px-8 py-4 flex items-center justify-between gap-4">
         {/* Logo */}
-        <h1 className="text-lg md:text-2xl font-bold text-orange-500 whitespace-nowrap">
+        <h1 className="text-lg md:text-2xl font-bold text-[#0F172A] whitespace-nowrap">
           Nexo.io
         </h1>
 
@@ -30,9 +30,12 @@ const Navbar = ({ search, onSearchChange, onCheckout }) => {
           className="relative cursor-pointer"
           onClick={() => setIsCartOpen(true)}
         >
-          <ShoppingCart className="w-6 h-6 text-white" />
+          <ShoppingCart className="w-6 h-6 text-[#0F172A]" />
           {getTotalItems() > 0 && (
-            <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+            <span
+              style={{ backgroundColor: "#EA580C" }}
+              className="absolute -top-2 -right-2 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+            >
               {getTotalItems()}
             </span>
           )}

@@ -1,12 +1,17 @@
+import { Search } from "lucide-react";
+
 const SearchBar = ({ value, onChange }) => {
   return (
-    <input
-      type="text"
-      placeholder="Buscar producto..."
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-400 outline-none focus:border-orange-500 transition-all"
-    />
+    <div className="relative w-full">
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder-gray-500 outline-none focus:border-[#0F172A] focus:shadow-md transition-all"
+      />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+    </div>
   );
 };
 
