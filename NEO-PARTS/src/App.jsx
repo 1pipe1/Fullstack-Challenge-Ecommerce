@@ -13,8 +13,8 @@ import ProductosFirebase from "./components/ProductosFirebase";
 const PRODUCTS_PER_PAGE = 6;
 
 function App() {
-  const [products, setProducts] = useState([]); 
-  
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products").then((response) => {
       setProducts(response.data);
@@ -52,15 +52,14 @@ function App() {
   }
 
   return (
-
     <div className="min-h-screen bg-gray-900 text-white">
       <Navbar
         search={search}
         onSearchChange={(val) => {
           setSearch(val);
           setCurrentPage(1);
-          <ProductosFirebase />;
-        }}      
+        }}
+        onCheckout={() => setShowCheckout(true)}
       />
 
       <div className="p-4 md:p-8">
@@ -82,8 +81,6 @@ function App() {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-
-        <CartSummary onCheckout={() => setShowCheckout(true)} />
 
         {totalPages > 1 && (
           <div className="flex justify-center gap-2 mt-6">
