@@ -43,7 +43,7 @@ const AuthPage = () => {
       <div className="w-full max-w-md bg-slate-800 p-8 rounded-xl shadow-lg border border-slate-700">
         {/* Título dinámico según modo (login o registro) */}
         <h2 className="text-3xl font-bold text-center mb-6 text-orange-500">
-          {isLogin ? 'Iniciar Sesión' : 'Registrarse'}
+          {isLogin ? "Iniciar Sesión" : "Registrarse"}
         </h2>
 
         {/* Mensaje de error si existe */}
@@ -71,6 +71,9 @@ const AuthPage = () => {
             </div>
           )}
 
+          <div class="bg-orange-500/10 border border-orange-500/50 text-orange-500 text-[14px] py-1 px-2 rounded mb-4 text-center">
+            Ingresa con: Email: <strong>demo@example.com</strong> y Password: <strong>123456</strong>
+          </div>
           {/* Campo de email */}
           <div>
             <label className="block text-sm font-medium mb-2 text-gray-300">
@@ -106,21 +109,21 @@ const AuthPage = () => {
             type="submit"
             className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-colors"
           >
-            {isLogin ? 'Iniciar Sesión' : 'Registrarse'}
+            {isLogin ? "Iniciar Sesión" : "Registrarse"}
           </button>
         </form>
 
         {/* Enlace para cambiar entre login y registro */}
         <p className="text-center mt-6 text-gray-400">
-          {isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}{' '}
+          {isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}{" "}
           <button
             onClick={() => {
               setIsLogin(!isLogin); // Cambiar modo
-              setError(''); // Limpiar errores
+              setError(""); // Limpiar errores
             }}
             className="text-orange-500 hover:text-orange-400 font-semibold"
           >
-            {isLogin ? 'Regístrate aquí' : 'Inicia sesión aquí'}
+            {isLogin ? "Regístrate aquí" : "Inicia sesión aquí"}
           </button>
         </p>
       </div>

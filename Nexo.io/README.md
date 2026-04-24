@@ -1,16 +1,42 @@
-# React + Vite
+# 🚀 Nexo - Fullstack E-commerce Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido a **Nexo**! Este proyecto es el primer paso firme hacia una herramienta integral de gestión de inventario y ventas, diseñada con un enfoque práctico y profesional.
 
-Currently, two official plugins are available:
+> **Propósito del proyecto:** Desarrollar una solución eficiente para el control de stock y ventas, optimizada para dispositivos móviles y escritorio, pensando en la agilidad que requiere un negocio real.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🔗 Demo en Vivo
+Puedes probar la aplicación aquí:
+👉 [**Ver Nexo en GitHub Pages**](https://1pipe1.github.io/Fullstack-Challenge-Ecommerce/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*(Nota: En esta fase de prueba, puedes ingresar con cualquier correo y contraseña).*
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tecnologías Utilizadas
+
+Este proyecto fue construido utilizando la "Santísima Trinidad" del desarrollo moderno:
+* **React + Vite:** Para una interfaz rápida y reactiva.
+* **Tailwind CSS:** Diseño responsivo y estilizado mediante utilidades.
+* **Zustand:** Gestión de estado global ligera y eficiente (Carrito de compras).
+* **Local Storage:** Persistencia de datos para que tu carrito no se pierda al recargar.
+* **Lucide React:** Iconografía limpia y profesional.
+
+---
+
+## 🎯 Características Principales
+- [x] **Arquitectura Atómica:** Componentes organizados y reutilizables.
+- [x] **Diseño Responsivo:** Optimizado para trabajar desde el celular o el PC.
+- [x] **Sistema de Carrito:** Agregar, quitar y calcular totales en tiempo real.
+- [x] **Persistencia:** Los datos se mantienen en el navegador del usuario.
+- [x] **Buscador Inteligente:** Filtro de productos por nombre en tiempo real.
+- [x] **Despliegue Automatizado:** CI/CD básico mediante GitHub Actions/Pages.
+
+---
+
+## 🏗️ Cómo ejecutar en local
+
+1. Clona el repositorio:
+   ```bash
+   git clone [https://github.com/1pipe1/Fullstack-Challenge-Ecommerce.git](https://github.com/1pipe1/Fullstack-Challenge-Ecommerce.git)
