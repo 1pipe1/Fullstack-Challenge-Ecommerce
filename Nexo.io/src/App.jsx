@@ -122,6 +122,25 @@ function App() {
           ))}
         </div>
 
+        {/* Mensaje cuando no hay resultados de búsqueda */}
+        {filteredProducts.length === 0 && search && (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">🔍</div>
+            <p className="text-gray-400 text-lg">
+              No se encontraron productos para "{search}"
+            </p>
+            <button
+              onClick={() => {
+                setSearch("");
+                setCurrentPage(1);
+              }}
+              className="mt-4 text-orange-500 hover:text-orange-400 font-semibold"
+            >
+              Limpiar búsqueda
+            </button>
+          </div>
+        )}
+
         {totalPages > 1 && (
           <div className="flex justify-center gap-2 mt-6">
             {Array.from({ length: totalPages }, (_, i) => (
