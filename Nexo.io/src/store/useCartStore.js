@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
+  
 // Store de Zustand para manejar el carrito de compras
 // Usa persist para guardar el carrito en localStorage
 const useCartStore = create(

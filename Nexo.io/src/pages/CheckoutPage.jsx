@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import useCartStore from '../store/useCartStore';
+import { useNavigate } from 'react-router-dom';
 
 // Página de checkout para previsualizar y confirmar la compra
 const CheckoutPage = () => {
   // Estado para mostrar mensaje de compra exitosa
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const navigate = useNavigate();
 
   // Obtener funciones y datos del store del carrito
   const cart = useCartStore((state) => state.cart); // Productos en el carrito
@@ -37,7 +39,7 @@ const CheckoutPage = () => {
           </p>
           {/* Botón para volver al inicio (recargar página) */}
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => navigate("/")}
             className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
           >
             Volver al Inicio
@@ -61,7 +63,7 @@ const CheckoutPage = () => {
           </p>
           {/* Botón para volver al inicio */}
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => navigate("/")}
             className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
           >
             Volver al Inicio

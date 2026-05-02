@@ -1,3 +1,4 @@
+
 // Función para obtener productos de la API
 export const fetchProducts = async () => {
   try {

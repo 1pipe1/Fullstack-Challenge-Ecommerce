@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
-
+import { useNavigate } from "react-router-dom";
 // Página de autenticación con formularios de login y registro
 const AuthPage = () => {
   // Estado local para controlar si mostramos formulario de login o registro
@@ -15,7 +15,8 @@ const AuthPage = () => {
   // Obtener funciones del store de autenticación
   const login = useAuthStore((state) => state.login);
   const register = useAuthStore((state) => state.register);
-
+  const navigate = useNavigate();
+  
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevenir recarga de la página
@@ -36,6 +37,7 @@ const AuthPage = () => {
         return;
       }
       register(email, password, name);
+      navigate("/");
     }
   };
 
