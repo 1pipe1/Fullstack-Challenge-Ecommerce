@@ -26,6 +26,7 @@ const AuthPage = () => {
       // Lógica de login
       const success = login(email, password);
       if (!success) {
+        navigate("/login");
         setError(
           "Credenciales inválidas. El password debe tener al menos 6 caracteres.",
         );
@@ -75,7 +76,7 @@ const AuthPage = () => {
             </div>
           )}
 
-          <div class="bg-orange-500/10 border border-orange-500/50 text-orange-500 text-[14px] py-1 px-2 rounded mb-4 text-center">
+          <div className="bg-orange-500/10 border border-orange-500/50 text-orange-500 text-[14px] py-1 px-2 rounded mb-4 text-center">
             Prueba Ingreso
             <br />
             Email: <strong>demo@example.com</strong>
