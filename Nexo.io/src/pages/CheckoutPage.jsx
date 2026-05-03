@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import useCartStore from '../store/useCartStore';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import useCartStore from "../store/useCartStore";
+import { useNavigate } from "react-router-dom";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
 
 // Página de checkout para previsualizar y confirmar la compra
 const CheckoutPage = () => {
@@ -17,13 +19,26 @@ const CheckoutPage = () => {
   const totalPrice = getTotalPrice();
 
   // Función para manejar la confirmación de la compra
-  const handleConfirmPurchase = () => {
-    // Vaciar el carrito
+  const handleConfirmPurchase = async () => {
+    try {
+    await addDoc(collection(db, "orders"), {
+      items: cart.map((item) => ({
+        id: item.id,
+        name: item.title || item.name,
+        price: item.price,
+        quantity: item.quantity,
+        image: item.image,
+      })),
+      total: totalPrice,
+      createdAt: serverTimestamp(),
+      status: "completed",
+    });
     clearCart();
-    // Mostrar mensaje de éxito
     setPurchaseSuccess(true);
-  };
-
+  } catch (error) {
+    console.error("Error saving order:", error);
+  }
+};
   // Si la compra fue exitosa, mostrar mensaje de confirmación
   if (purchaseSuccess) {
     return (

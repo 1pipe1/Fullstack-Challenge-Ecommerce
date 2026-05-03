@@ -5,6 +5,8 @@ import AuthPage from "./pages/AuthPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
+import DashboardPage from "./pages/DashboardPage";
+
 
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -33,6 +35,7 @@ function App() {
         element={isAuthenticated ? <CheckoutPage /> : <Navigate to="/login" />}
       />
       <Route path="/admin" element={<AdminPage />} />
+      <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
