@@ -157,40 +157,73 @@ const StockPage = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr
-              key={product.id}
-              className="border-t border-gray-100 hover:bg-gray-50"
-            >
-              <td className="p-3 flex items-center gap-3">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-10 h-10 object-contain"
-                />
-                <span className="text-sm font-medium">{product.title}</span>
-              </td>
-              <td className="p-3 text-sm text-gray-500">{product.category}</td>
-              <td className="p-3 text-sm font-semibold text-orange-500">
-                ${product.price}
-              </td>
-              <td className="p-3 text-sm">{product.stock}</td>
-              <td className="p-3 flex gap-2">
-                <button
-                  onClick={() => handleEdit(product)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white text-xs py-1 px-3 rounded"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => handleDelete(product.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white text-xs py-1 px-3 rounded"
-                >
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          ))}
+          {products.map((product) => {
+            const isOutOfStock = product.stock === 0;
+            const isLowStock = product.stock > 0 && product.stock <= 10;
+
+            return (
+              <tr
+                key={product.id}
+                className={`border-t border-gray-100 transition-colors ${
+                  isOutOfStock
+                    ? "bg-red-50 hover:bg-red-100"
+                    : isLowStock
+                      ? "bg-yellow-50 hover:bg-yellow-100"
+                      : "hover:bg-gray-50"
+                }`}
+              >
+                <td className="p-3 flex items-center gap-3">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-10 h-10 object-contain"
+                  />
+                  <span className="text-sm font-medium">{product.title}</span>
+                </td>
+                <td className="p-3 text-sm text-gray-500">
+                  {product.category}
+                </td>
+                <td className="p-3 text-sm font-semibold text-orange-500">
+                  ${product.price}
+                </td>
+
+                {/* Columna Stock con badge */}
+                <td className="p-3 text-sm font-semibold">
+                  <span
+                    className={`${
+                      isOutOfStock
+                        ? "text-red-600"
+                        : isLowStock
+                          ? "text-yellow-600"
+                          : "text-gray-700"
+                    }`}
+                  >
+                    {isOutOfStock
+                      ? "🚫 0"
+                      : isLowStock
+                        ? `⚠️ ${product.stock}`
+                        : product.stock}
+                  </span>
+                </td>
+
+                {/* Columna Acciones — separada del stock */}
+                <td className="p-3 flex gap-2">
+                  <button
+                    onClick={() => handleEdit(product)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white text-xs py-1 px-3 rounded"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white text-xs py-1 px-3 rounded"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
