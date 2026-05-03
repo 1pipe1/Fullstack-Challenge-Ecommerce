@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 
-
 const AdminSidebar = () => {
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
@@ -13,9 +12,9 @@ const AdminSidebar = () => {
   };
 
   const links = [
-    { to: "/dashboard", label: "📊 Dashboard" },
-    { to: "/admin", label: "📦 Stock" },
-    { to: "/sales", label: "💰 Ventas" },
+    { to: "/admin", label: "📊 Dashboard" },
+    { to: "/admin/stock", label: "📦 Stock" },
+    { to: "/admin/sales", label: "💰 Ventas" },
   ];
 
   return (

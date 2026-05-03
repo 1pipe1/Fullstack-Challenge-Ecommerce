@@ -147,7 +147,9 @@ const CheckoutPage = () => {
 
           {/* Botón para cancelar y volver */}
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              navigate("/");
+            }}
             className="w-full mt-4 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg transition-colors"
           >
             Cancelar

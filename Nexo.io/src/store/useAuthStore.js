@@ -6,10 +6,12 @@ const useAuthStore = create(
     (set, get) => ({
       user: null,
       isAuthenticated: false,
+      isAdmin: () => true,
 
       register: (email, password, name) => {
         const newUser = { id: Date.now(), email, name };
         set({ user: newUser, isAuthenticated: true });
+  
         return newUser;
       },
 

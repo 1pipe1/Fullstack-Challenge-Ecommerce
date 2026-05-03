@@ -4,6 +4,7 @@ import Navbar from "../components/organisms/Navbar";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import useStockStore from "../store/useStockStore";
+import useCartStore from "../store/useCartStore";
 
 const PRODUCTS_PER_PAGE = 8;
 
@@ -16,6 +17,7 @@ const HomePage = () => {
   const user = useAuthStore((state) => state.user);
   const logout = useAuthStore((state) => state.logout);
   const navigate = useNavigate();
+  const cart = useCartStore((state) => state.cart);
 
   useEffect(() => {
     fetchProducts();

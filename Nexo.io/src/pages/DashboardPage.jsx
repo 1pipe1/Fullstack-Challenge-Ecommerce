@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
-import AdminSidebar from "../components/organisms/AdminSidebar";
+import useStockStore from "../store/useStockStore";
 
 const DashboardPage = () => {
   const products = useStockStore((state) => state.products);
@@ -64,8 +64,7 @@ const DashboardPage = () => {
       value: orders.filter((o) => {
         if (!o.createdAt) return false;
         const date = o.createdAt.toDate();
-        const today = new Date();
-        return date.toDateString() === today.toDateString();
+        return date.toDateString() === new Date().toDateString();
       }).length,
       icon: "📅",
       color: "bg-yellow-500",
@@ -73,39 +72,29 @@ const DashboardPage = () => {
   ];
 
   if (loading)
-    return (
-      <div className="flex">
-        <AdminSidebar />
-        <div className="flex-1 flex items-center justify-center min-h-screen bg-gray-100">
-          <p className="text-gray-500">Cargando dashboard...</p>
-        </div>
-      </div>
-    );
+    return <p className="p-8 text-gray-500">Cargando dashboard...</p>;
 
   return (
-    <div className="flex">
-      <AdminSidebar />
-      <main className="flex-1 p-8 bg-gray-100 min-h-screen">
-        <h1 className="text-2xl font-bold mb-8 text-gray-800">📊 Dashboard</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {metrics.map((m) => (
+    <div>
+      <h1 className="text-2xl font-bold mb-8 text-gray-800">📊 Dashboard</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {metrics.map((m) => (
+          <div
+            key={m.label}
+            className="bg-white rounded-xl shadow p-6 flex items-center gap-4"
+          >
             <div
-              key={m.label}
-              className="bg-white rounded-xl shadow p-6 flex items-center gap-4"
+              className={`${m.color} text-white text-3xl w-14 h-14 rounded-full flex items-center justify-center`}
             >
-              <div
-                className={`${m.color} text-white text-3xl w-14 h-14 rounded-full flex items-center justify-center`}
-              >
-                {m.icon}
-              </div>
-              <div>
-                <p className="text-gray-500 text-sm">{m.label}</p>
-                <p className="text-2xl font-bold text-gray-800">{m.value}</p>
-              </div>
+              {m.icon}
             </div>
-          ))}
-        </div>
-      </main>
+            <div>
+              <p className="text-gray-500 text-sm">{m.label}</p>
+              <p className="text-2xl font-bold text-gray-800">{m.value}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

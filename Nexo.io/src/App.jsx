@@ -2,11 +2,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useAuthStore from "./store/useAuthStore";
 import AuthPage from "./pages/AuthPage";
-import CheckoutPage from "./pages/CheckoutPage";
+import AdminLayout from "./layout/AdminLayout";
 import HomePage from "./pages/HomePage";
-import AdminPage from "./pages/AdminPage";
 import DashboardPage from "./pages/DashboardPage";
-
+import StockPage from "./pages/StockPage";
+import SalesPage from "./pages/SalesPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -34,9 +35,11 @@ function App() {
         path="/checkout"
         element={isAuthenticated ? <CheckoutPage /> : <Navigate to="/login" />}
       />
-      <Route path="/admin" element={<AdminPage />} />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route index element={<DashboardPage />} />
+        <Route path="stock" element={<StockPage />} />
+        <Route path="sales" element={<SalesPage />} />
+      </Route>
     </Routes>
   );
 }

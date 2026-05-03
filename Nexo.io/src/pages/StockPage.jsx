@@ -1,36 +1,22 @@
 import { useEffect, useState } from "react";
 import useStockStore from "../store/useStockStore";
-import useAuthStore from "../store/useAuthStore";
 
-const AdminPage = () => {
+const StockPage = () => {
   const products = useStockStore((state) => state.products);
   const fetchProducts = useStockStore((state) => state.fetchProducts);
   const [loading, setLoading] = useState(true);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
     fetchProducts().then(() => setLoading(false));
   }, []);
 
   if (loading)
-    return (
-      <div className="min-h-screen bg-[#F0F4F8] flex items-center justify-center">
-        <p className="text-gray-600">Cargando productos...</p>
-      </div>
-        );
-    
-    if (!isAuthenticated) {
-      return (
-        <div className="min-h-screen bg-[#F0F4F8] flex items-center justify-center">
-          <p className="text-gray-600">No tienes permiso para acceder a esta página</p>
-        </div>
-      );
-    }
-  
+    return <p className="p-8 text-gray-500">Cargando productos...</p>;
+
   return (
-    <div className="min-h-screen bg-[#F0F4F8] p-8">
-      <h1 className="text-2xl font-bold mb-6">Panel de Administrador</h1>
-      <table className="w-full bg-white rounded-xl shadow overflow-hidden">
+    <div>
+      <h1 className="text-3xl font-bold mb-6">📦 Stock</h1>
+      <table className="bg-white rounded-xl shadow overflow-hidden w-full">
         <thead className="bg-orange-500 text-white">
           <tr>
             <th className="p-3 text-left">Producto</th>
@@ -75,4 +61,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default StockPage;
