@@ -3,12 +3,15 @@ import useCartStore from "../store/useCartStore";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import useAuthStore from "../store/useAuthStore";
 
 // Página de checkout para previsualizar y confirmar la compra
 const CheckoutPage = () => {
   // Estado para mostrar mensaje de compra exitosa
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user)
+
 
   // Obtener funciones y datos del store del carrito
   const cart = useCartStore((state) => state.cart); // Productos en el carrito
@@ -28,6 +31,7 @@ const CheckoutPage = () => {
         price: item.price,
         quantity: item.quantity,
         image: item.image,
+        userEmail: user?.email || "guest",
       })),
       total: totalPrice,
       createdAt: serverTimestamp(),
