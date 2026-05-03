@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useCartStore from "../store/useCartStore";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import useAuthStore from "../store/useAuthStore";
 
@@ -37,6 +37,14 @@ const CheckoutPage = () => {
       createdAt: serverTimestamp(),
       status: "completed",
     });
+      for (const item of cart) {
+      const productRef = doc(db, "products", item.id);
+      const productSnapshot = await getDoc(productRef);
+      const productData = productSnapshot.data();
+        await updateDoc(productRef, {
+        stock: productData.stock - item.quantity,
+      });
+    }
     clearCart();
     setPurchaseSuccess(true);
   } catch (error) {
