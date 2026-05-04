@@ -29,7 +29,7 @@ const SalesPage = () => {
         <div className="bg-white rounded-xl shadow p-6">
           <p className="text-gray-500 text-sm">Total ventas</p>
           <p className="text-3xl font-bold text-green-600">
-            ${totalVentas.toFixed(2)}
+            ${totalVentas.toFixed(0)}
           </p>
         </div>
         <div className="bg-white rounded-xl shadow p-6">
@@ -39,7 +39,7 @@ const SalesPage = () => {
         <div className="bg-white rounded-xl shadow p-6">
           <p className="text-gray-500 text-sm">Promedio por orden</p>
           <p className="text-3xl font-bold text-purple-600">
-            ${promedio.toFixed(2)}
+            ${promedio.toFixed(0)}
           </p>
         </div>
       </div>
@@ -70,7 +70,7 @@ const SalesPage = () => {
                   </td>
                   <td className="py-3">{(o as any).userEmail || "—"}</td>
                   <td className="py-3 font-semibold text-green-600">
-                    ${(o as any).total?.toFixed(2)}
+                    ${(o as any).total?.toFixed(0)}
                   </td>
                   <td className="py-3">
                     <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">
