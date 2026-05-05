@@ -11,8 +11,8 @@ const AdminLayout = () => {
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />
-      <main className="flex-1 p-8 bg-gray-50">
-        <Outlet /> {/* aquí se renderizan Dashboard, Stock o Ventas */}
+      <main className="flex-1 p-4 md:p-8 bg-gray-50 pb-24 md:pb-8">
+        <Outlet />
       </main>
     </div>
   );

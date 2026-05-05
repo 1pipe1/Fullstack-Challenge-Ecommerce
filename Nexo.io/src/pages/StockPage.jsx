@@ -50,13 +50,11 @@ const StockPage = () => {
       stock: parseInt(form.stock),
       image: form.image,
     };
-
     if (editingProduct) {
       await updateDoc(doc(db, "products", editingProduct.id), data);
     } else {
       await addDoc(collection(db, "products"), data);
     }
-
     setShowForm(false);
     setEditingProduct(null);
     setForm(emptyForm);
@@ -68,23 +66,24 @@ const StockPage = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">📦 Stock</h1>
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6 p-4 bg-gray-100 rounded-lg">
+        <h1 className="text-2xl font-bold">📦 Stock</h1>
         <button
           onClick={() => {
             setEditingProduct(null);
             setForm(emptyForm);
             setShowForm(true);
           }}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg"
+          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg text-sm"
         >
-          + Agregar producto
+          + Agregar
         </button>
       </div>
 
-      {/* Modal formulario */}
+      {/* Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">
               {editingProduct ? "Editar producto" : "Agregar producto"}
@@ -146,86 +145,138 @@ const StockPage = () => {
         </div>
       )}
 
-      <table className="bg-white rounded-xl shadow overflow-hidden w-full">
-        <thead className="bg-orange-500 text-white">
-          <tr>
-            <th className="p-3 text-left">Producto</th>
-            <th className="p-3 text-left">Categoría</th>
-            <th className="p-3 text-left">Precio</th>
-            <th className="p-3 text-left">Stock</th>
-            <th className="p-3 text-left">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product) => {
-            const isOutOfStock = product.stock === 0;
-            const isLowStock = product.stock > 0 && product.stock <= 10;
-
-            return (
-              <tr
-                key={product.id}
-                className={`border-t border-gray-100 transition-colors ${
-                  isOutOfStock
-                    ? "bg-red-50 hover:bg-red-100"
-                    : isLowStock
-                      ? "bg-yellow-50 hover:bg-yellow-100"
-                      : "hover:bg-gray-50"
-                }`}
-              >
-                <td className="p-3 flex items-center gap-3">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-10 h-10 object-contain"
-                  />
-                  <span className="text-sm font-medium">{product.title}</span>
-                </td>
-                <td className="p-3 text-sm text-gray-500">
-                  {product.category}
-                </td>
-                <td className="p-3 text-sm font-semibold text-orange-500">
-                  ${product.price}
-                </td>
-
-                {/* Columna Stock con badge */}
-                <td className="p-3 text-sm font-semibold">
-                  <span
-                    className={`${
-                      isOutOfStock
-                        ? "text-red-600"
+      {/* TABLA — solo desktop */}
+      <div className="hidden md:block">
+        <table className="bg-white rounded-xl shadow overflow-hidden w-full">
+          <thead className="bg-orange-500 text-white">
+            <tr>
+              <th className="p-3 text-left">Producto</th>
+              <th className="p-3 text-left">Categoría</th>
+              <th className="p-3 text-left">Precio</th>
+              <th className="p-3 text-left">Stock</th>
+              <th className="p-3 text-left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => {
+              const isOutOfStock = product.stock === 0;
+              const isLowStock = product.stock > 0 && product.stock <= 10;
+              return (
+                <tr
+                  key={product.id}
+                  className={`border-t border-gray-100 transition-colors ${isOutOfStock ? "bg-red-50 hover:bg-red-100" : isLowStock ? "bg-yellow-50 hover:bg-yellow-100" : "hover:bg-gray-50"}`}
+                >
+                  <td className="p-3 flex items-center gap-3">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-10 h-10 object-contain"
+                    />
+                    <span className="text-sm font-medium">{product.title}</span>
+                  </td>
+                  <td className="p-3 text-sm text-gray-500">
+                    {product.category}
+                  </td>
+                  <td className="p-3 text-sm font-semibold text-orange-500">
+                    ${product.price.toLocaleString()}
+                  </td>
+                  <td className="p-3 text-sm font-semibold">
+                    <span
+                      className={
+                        isOutOfStock
+                          ? "text-red-600"
+                          : isLowStock
+                            ? "text-yellow-600"
+                            : "text-gray-700"
+                      }
+                    >
+                      {isOutOfStock
+                        ? "🚫 0"
                         : isLowStock
-                          ? "text-yellow-600"
-                          : "text-gray-700"
-                    }`}
-                  >
-                    {isOutOfStock
-                      ? "🚫 0"
-                      : isLowStock
-                        ? `⚠️ ${product.stock}`
-                        : product.stock}
-                  </span>
-                </td>
+                          ? `⚠️ ${product.stock}`
+                          : product.stock}
+                    </span>
+                  </td>
+                  <td className="p-3 flex gap-2">
+                    <button
+                      onClick={() => handleEdit(product)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white text-xs py-1 px-3 rounded"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="bg-red-500 hover:bg-red-600 text-white text-xs py-1 px-3 rounded"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
-                {/* Columna Acciones — separada del stock */}
-                <td className="p-3 flex gap-2">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white text-xs py-1 px-3 rounded"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => handleDelete(product.id)}
-                    className="bg-red-500 hover:bg-red-600 text-white text-xs py-1 px-3 rounded"
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {/* CARDS — solo móvil */}
+      <div className="md:hidden space-y-3">
+        {products.map((product) => {
+          const isOutOfStock = product.stock === 0;
+          const isLowStock = product.stock > 0 && product.stock <= 10;
+          return (
+            <div
+              key={product.id}
+              className={`bg-white rounded-xl shadow p-4 border-l-4 ${isOutOfStock ? "border-red-400 bg-red-50" : isLowStock ? "border-yellow-400 bg-yellow-50" : "border-orange-400"}`}
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-12 h-12 object-contain rounded-lg bg-gray-50"
+                />
+                <div className="flex-1">
+                  <p className="font-semibold text-gray-800 text-sm leading-tight">
+                    {product.title}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    {product.category}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-orange-500 font-bold">
+                  ${product.price.toLocaleString()}
+                </span>
+                <span
+                  className={`text-sm font-semibold ${isOutOfStock ? "text-red-600" : isLowStock ? "text-yellow-600" : "text-gray-700"}`}
+                >
+                  {isOutOfStock
+                    ? "🚫 Agotado"
+                    : isLowStock
+                      ? `⚠️ ${product.stock} uds`
+                      : `${product.stock} uds`}
+                </span>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleEdit(product)}
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 rounded-lg"
+                >
+                  ✏️ Editar
+                </button>
+                <button
+                  onClick={() => handleDelete(product.id)}
+                  className="flex-1 bg-red-500 hover:bg-red-600 text-white text-sm py-2 rounded-lg"
+                >
+                  🗑️ Eliminar
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

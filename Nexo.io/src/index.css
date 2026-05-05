@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@theme {
+  --color-nexo-orange: #ea580c;
+  --color-nexo-orange-hover: #c2410c;
+  --color-nexo-blue: #0f172a;
+  --color-nexo-bg: #f0f4f8;
+}
