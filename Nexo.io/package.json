@@ -5,7 +5,7 @@
   "homepage": "https://1pipe1.github.io/Fullstack-Challenge-Ecommerce/",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
